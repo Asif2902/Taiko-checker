@@ -26,6 +26,20 @@ document.getElementById('checkGithubBtn').addEventListener('click', async () => 
     document.getElementById('githubResults').innerText = results.join('\n');
 });
 
+document.getElementById('checkGithubUsernameBtn').addEventListener('click', async () => {
+    const githubUsernames = document.getElementById('githubUsernameInput').value.split('\n').map(id => id.trim()).filter(Boolean).slice(0, 50);
+    const results = await Promise.all(githubUsernames.map(async username => {
+        try {
+            const response = await fetch(`https://api.github.com/users/${username}`);
+            const data = await response.json();
+            return `GitHub username ${username} has ID ${data.id}`;
+        } catch (error) {
+            return `Error checking GitHub username ${username}`;
+        }
+    }));
+    document.getElementById('githubUsernameResults').innerText = results.join('\n');
+});
+
 function maskAddress(address) {
     return address.slice(0, 3) + '***' + address.slice(-2);
 }
