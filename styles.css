@@ -52,3 +52,7 @@ button:hover {
     border-radius: 4px;
     white-space: pre-wrap;
 }
+.logo {
+    width: 100px; /* Adjust as needed */
+    margin-bottom: 20px;
+}
